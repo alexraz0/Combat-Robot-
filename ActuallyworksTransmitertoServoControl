@@ -1,31 +1,92 @@
-/* Sweep
- by BARRAGAN <http://barraganstudio.com>
- This example code is in the public domain.
-
- modified 8 Nov 2013
- by Scott Fitzgerald
- https://www.arduino.cc/en/Tutorial/LibraryExamples/Sweep
-*/
-
+#define CH1 13
+#define CH2 12
+#define CH3 11
+#define CH4 10
 #include <Servo.h>
 
 Servo myservo;  // create servo object to control a servo
 // twelve servo objects can be created on most boards
+// Integers to represent values from sticks and pots
+int ch1Value;
+int ch2Value;
+int ch3Value;
+int ch4Value; 
+int ch5Value;
+ 
+// Boolean to represent switch value
+bool ch6Value;
+ 
+int pos = 0; 
+// Read the number of a specified channel and convert to the range provided.
+// If the channel is off, return the default value
+int readChannel(int channelInput, int minLimit, int maxLimit, int defaultValue){
+  int ch = pulseIn(channelInput, HIGH, 30000);
+  if (ch < 100) return defaultValue;
+  return map(ch, 1000, 2000, minLimit, maxLimit);
+}
+ 
+// Read the switch channel and return a boolean value
+bool readSwitch(byte channelInput, bool defaultValue){
+  int intDefaultValue = (defaultValue)? 100: 0;
+  int ch = readChannel(channelInput, 0, 100, intDefaultValue);
+  return (ch > 50);
+}
+ 
+void setup(){
+  // Set up serial monitor
+  Serial.begin(115200);
+  myservo.attach(8);  // attaches the servo on pin 9 to the servo object
+  // Set all pins as inputs
+  pinMode(CH1, INPUT);
+  pinMode(CH2, INPUT);
+  pinMode(CH3, INPUT);
+  pinMode(CH4, INPUT);
+}
+ 
+ 
+void loop() {
+  
+  // Get values for each channel
+  ch1Value = readChannel(CH1, -100, 100, 0);
+  ch2Value = readChannel(CH2, -100, 100, 0);
+  ch3Value = readChannel(CH3, -100, 100, -100);
+  ch4Value = readChannel(CH4, -100, 100, 0);
 
-int pos = 0;    // variable to store the servo position
+  
+  // Print to Serial Monitor
+  Serial.print("Ch1: ");
+  Serial.print(ch1Value);
+  Serial.print(" | Ch2: ");
+  Serial.print(ch2Value);
+  
+  Serial.print ("  | Pos: ");
 
-void setup() {
-  myservo.attach(9);  // attaches the servo on pin 9 to the servo object
+  /*
+  Serial.print(" | Ch3: ");
+  Serial.print(ch3Value);
+  Serial.print(" | Ch4: ");
+  Serial.print(ch4Value);
+  Serial.print(" | Ch5: ");
+  Serial.print(ch5Value);
+  Serial.print(" | Ch6: ");
+  Serial.println(ch6Value);*/
+  
+  delay(15);
+
+if (ch2Value <= -92){
+  pos = 5;
 }
 
-void loop() {
-  for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
-    // in steps of 1 degree
-    myservo.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(15);                       // waits 15 ms for the servo to reach the position
-  }
-  for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
-    myservo.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(15);                       // waits 15 ms for the servo to reach the position
-  }
+else if (88 <= ch2Value >= 97){
+    pos = 180;
+}
+else{
+  pos = ch2Value + 92;
+}
+
+Serial.println(pos);
+
+  myservo.write(pos);              // tell servo to go to position in variable 'pos'
+  delay(15);                       // waits 15 ms for the servo to reach the position
+
 }
