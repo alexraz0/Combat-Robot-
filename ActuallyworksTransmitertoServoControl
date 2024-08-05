@@ -74,7 +74,7 @@ void loop() {
   delay(15);
 
 if (ch2Value <= -92){
-  pos = 5;
+  pos = 0;
 }
 
 else if (88 <= ch2Value >= 97){
