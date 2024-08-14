@@ -1,0 +1,97 @@
+#include <SparkFun_TB6612.h>
+
+  // put your setup code here, to run once:
+
+
+// Constructor. Mainly sets up pins.
+//Motor(int In1pin, int In2pin, int PWMpin, int offset, int STBYpin);      
+
+// Pins for all inputs, keep in mind the PWM defines must be on PWM pins
+//front Wheels 
+
+#define AIN1 30
+#define BIN1 34
+#define AIN2 32
+#define BIN2 36
+#define PWMA 2
+#define PWMB 3
+#define STBY1 51
+
+//back wheels 
+
+#define CIN1 31
+#define DIN1 35
+#define CIN2 32
+#define DIN2 37
+#define PWMC 4
+#define PWMD 5
+#define STBY2 53
+// these constants are used to allow you to make your motor configuration 
+// line up with function names like forward.  Value can be 1 or -1
+const int offsetA = 1;
+const int offsetB = 1;
+const int offsetC = 1;
+const int offsetD = 1;
+
+
+Motor motor1 = Motor(AIN1, AIN2,PWMA, offsetA, STBY1);
+Motor motor2 = Motor(BIN1, BIN2,PWMB, offsetB, STBY1);
+Motor motor3 = Motor(CIN1, CIN2,PWMC, offsetC, STBY2);
+Motor motor4 = Motor(DIN1, DIN2,PWMD, offsetD, STBY2);
+
+
+void setup()
+{
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly
+  /*
+   motor2.drive(255,5000);
+   motor1.drive(255,5000);
+   motor3.drive(255,1000);
+   motor4.drive(255,1000);
+  // motor1.brake();
+   //motor2.brake();
+   //motor3.brake();
+   //motor4.brake();
+   
+   
+   motor1.drive(-255,1000);
+   motor2.drive(-255,1000);
+   motor3.drive(-255,1000);
+   motor4.drive(-255,1000);
+   */
+   /*motor1.brake();
+   motor2.brake();
+   motor3.brake();
+   motor4.brake();*/
+
+
+//Actually used codes below: 
+   forward(motor3, motor4, 150);
+   delay(1000);
+   back(motor3, motor4, 150);
+   delay(1000);
+   
+
+/*
+int speed = 100;
+int duration = 1000;
+// drive(), but with a delay(duration)
+void drive(speed,duration);  
+
+//currently not implemented
+void stop();           // Stop motors, but allow them to coast to a halt.
+//void coast();          // Stop motors, but allow them to coast to a halt.
+
+int speed = 200;
+
+void drive(speed,duration);
+
+void coast();
+*/
+
+}
+
