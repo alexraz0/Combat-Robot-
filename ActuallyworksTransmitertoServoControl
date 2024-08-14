@@ -1,3 +1,4 @@
+//defined the pins on the board
 #define CH1 13
 #define CH2 12
 #define CH3 11
@@ -73,10 +74,10 @@ void loop() {
   
   delay(15);
 
+//if else tree converts the trasnmiter range values to the new values we can use for the servo 
 if (ch2Value <= -92){
   pos = 0;
 }
-
 else if (88 <= ch2Value >= 97){
     pos = 180;
 }
@@ -84,7 +85,7 @@ else{
   pos = ch2Value + 92;
 }
 
-Serial.println(pos);
+Serial.println(pos); //show us new value
 
   myservo.write(pos);              // tell servo to go to position in variable 'pos'
   delay(15);                       // waits 15 ms for the servo to reach the position
