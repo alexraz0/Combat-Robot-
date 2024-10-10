@@ -1,4 +1,4 @@
-# Important Info To Keep Track Of
+# Important Info To Keep Track Of :star2:
 
 **Receiver Channel Numbers**
 * Channel 1: right stick left and right
