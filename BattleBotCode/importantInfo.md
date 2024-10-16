@@ -8,7 +8,6 @@
 * Channel 5: left knob
 * Channel 6: right knob
 
-  
 **Controlling Motor with ESC**
 * Lowest moving value: 1400
 ---
