@@ -16,3 +16,6 @@
 * https://community.robotshop.com/blog/show/rc-speed-controller-esc-arduino-library
 * https://dronebotworkshop.com/radio-control-arduino-car/
 ---
+
+frequemmcy for pulsewidth 
+min .5ms to max 2.4ms based off video  10/22
