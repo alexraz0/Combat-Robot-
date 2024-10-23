@@ -10,4 +10,8 @@
 
 **Controlling Motor with ESC**
 * Lowest moving value: 1400
+
+**Code Guidance**
+* https://community.robotshop.com/blog/show/rc-speed-controller-esc-arduino-library
+* https://dronebotworkshop.com/radio-control-arduino-car/
 ---
