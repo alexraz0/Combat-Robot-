@@ -12,10 +12,10 @@
 * Lowest moving value: 1400
 * Highest moving value: 2000
 
-  **Duty Cycles**
-  *10% of 255 = 25.5
-  *7% of 255 = 19.125
-  *5% of 255 = 12.75
+**Duty Cycles**
+*10% of 255 = 25.5
+*7% of 255 = 19.125
+*5% of 255 = 12.75
 
 **Code Guidance**
 * https://community.robotshop.com/blog/show/rc-speed-controller-esc-arduino-library
