@@ -10,6 +10,7 @@
 
 **Controlling Motor with ESC**
 * Lowest moving value: 1400
+* Highest moving value: 2000
 
 **Code Guidance**
 * https://community.robotshop.com/blog/show/rc-speed-controller-esc-arduino-library
