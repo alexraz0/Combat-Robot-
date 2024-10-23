@@ -8,7 +8,7 @@
  */
 #include "ESC.h"
 #define LED_PIN (13)                                      // Pin for the LED 
-#define SPEED_MIN (1000)                                  // Set the Minimum Speed in microseconds
+#define SPEED_MIN (1400)                                  // Set the Minimum Speed in microseconds
 #define SPEED_MAX (2000)                                  // Set the Minimum Speed in microseconds
 
 ESC myESC (9, SPEED_MIN, SPEED_MAX, 500);                 // ESC_Name (ESC PIN, Minimum Value, Maximum Value, Default Speed, Arm Value)
