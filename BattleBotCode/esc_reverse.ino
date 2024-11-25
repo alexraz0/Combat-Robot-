@@ -22,7 +22,7 @@ void setup()
 
 void loop() 
 {
-    for (speedSet = ARM_VAL; speedSet <= MAX_FORWARD; speedSet += 1) //speed up forward
+    for (speedSet = ARM_VAL; speedSet <= MAX_FORWARD; speedSet ++) //speed up forward
     { 
         digitalWrite(LED_PIN, HIGH); 
         myESC.speed(speedSet);                               
@@ -30,14 +30,14 @@ void loop()
         Serial.println(speedSet);
     }
 
-    for (speedSet = MAX_FORWARD; speedSet >= ARM_VAL; speedSet -= 1) //slow down forward
+    for (speedSet = MAX_FORWARD; speedSet >= ARM_VAL; speedSet --) //slow down forward
     { 
         myESC.speed(speedSet);                               
         delay(30);                                           
         Serial.println(speedSet);
     }
 
-    for (speedSet = ARM_VAL; speedSet >= MAX_REVERSE; speedSet -= 1) //speed up reverse
+    for (speedSet = ARM_VAL; speedSet >= MAX_REVERSE; speedSet --) //speed up reverse
     {   
         digitalWrite(LED_PIN, LOW); 
         myESC.speed(speedSet);                              
@@ -45,7 +45,7 @@ void loop()
         Serial.println(speedSet);
     }
 
-    for (speedSet = MAX_REVERSE; speedSet <= ARM_VAL; speedSet += 1) //slow down reverse
+    for (speedSet = MAX_REVERSE; speedSet <= ARM_VAL; speedSet ++) //slow down reverse
     {  
         myESC.speed(speedSet);                               
         delay(30);                                           
