@@ -13,9 +13,9 @@
 * Highest moving value: 2000
 
 **Duty Cycles**
-* 10% of 255 = 25.5
-* 7% of 255 = 19.125
-* 5% of 255 = 12.75
+* 10% of 255 = 25.5 : 2000us
+* 7% of 255 = 19.125: 1400us
+* 5% of 255 = 12.75 : 1000us
 
 
 **Code Guidance**
