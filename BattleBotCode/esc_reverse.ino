@@ -1,12 +1,12 @@
 #include "ESC.h"
 
 #define LED_PIN (13)  
-#define ESC_PIN (9)                                           // Pin for the LED 
-#define SPEED_MIN (1000)                                      // Set the Minimum Speed in microseconds
-#define SPEED_MAX (2000)   
-#define ARM_VAL (1400)                                        // Set the Minimum Speed in microseconds
+#define ESC_PIN (9)
+#define MAX_REVERSE (1000)
+#define MAX_FORWARD (2000)
+#define ARM_VAL (1400)                                        // Midpoint
 
-ESC myESC (ESC_PIN, SPEED_MIN, SPEED_MAX, ARM_VAL);           // ESC_Name (ESC PIN, Minimum Value, Maximum Value, Default Speed, Arm Value)
+ESC myESC (ESC_PIN, MAX_REVERSE, MAX_FORWARD, ARM_VAL);           // ESC_Name (ESC PIN, Minimum Value, Maximum Value, Default Speed, Arm Value)
 int speedSet;                                                 // Variable for the speed sent to the ESC
 
 void setup() 
@@ -22,25 +22,33 @@ void setup()
 
 void loop() 
 {
- 
-    for (speedSet = SPEED_MIN; speedSet <= SPEED_MAX; speedSet += 1) 
+    for (speedSet = ARM_VAL; speedSet <= MAX_FORWARD; speedSet += 1) //speed up forward
     { 
         digitalWrite(LED_PIN, HIGH); 
-        myESC.speed(speedSet);                               // tell ESC to go to the oESC speed value
-        delay(30);                                           // waits 10ms for the ESC to reach speed
+        myESC.speed(speedSet);                               
+        delay(30);                                           
         Serial.println(speedSet);
     }
 
-    for (speedSet2 = SPEED_MAX; speedSet2 >= SPEED_MIN; speedSet2 -= 1) 
+    for (speedSet = MAX_FORWARD; speedSet >= ARM_VAL; speedSet -= 1) //slow down forward
+    { 
+        myESC.speed(speedSet);                               
+        delay(30);                                           
+        Serial.println(speedSet);
+    }
+
+    for (speedSet = ARM_VAL; speedSet >= MAX_REVERSE; speedSet -= 1) //speed up reverse
     {   
         digitalWrite(LED_PIN, LOW); 
-        myESC.speed(speedSet2);                              // tell ESC to go to the oESC speed value
-        delay(30);                                           // waits 10ms for the ESC to reach speed
-        Serial.println(speedSet2);
+        myESC.speed(speedSet);                              
+        delay(30);                                           
+        Serial.println(speedSet);
     }
-   
- 
-  
 
-    
+    for (speedSet = MAX_REVERSE; speedSet <= ARM_VAL; speedSet += 1) //slow down reverse
+    {  
+        myESC.speed(speedSet);                               
+        delay(30);                                           
+        Serial.println(speedSet);
+    }
 }
