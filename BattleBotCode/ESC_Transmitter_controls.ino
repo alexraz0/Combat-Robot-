@@ -1,23 +1,23 @@
 #include "ESC.h"
 
 #define LED_PIN (13)  
+#define SIGNAL_PIN (8) 
 #define ESC_PIN (9)
 #define MAX_REVERSE (1000)
 #define MAX_FORWARD (2000)
 #define ARM_VAL (1500)                                        // Midpoint
 
 ESC myESC (ESC_PIN, MAX_REVERSE, MAX_FORWARD, ARM_VAL);       // ESC_Name (ESC PIN, Minimum Value, Maximum Value, Default Speed, Arm Value)
-int speedSet;                                                 // Variable for the speed sent to the ESC
 
-#define signalPin 8 //signal cable goes in digital pin 12 of arduino
+int speedSet;                                                 // Variable for the speed sent to the ESC
 
 int chValue;
 
 int readChannel(int channelInput, int minLimit, int maxLimit, int defaultValue)
 {
-  int ch = pulseIn(channelInput, HIGH, 30000);
-  if (ch < 100) return defaultValue;
-  return map(ch, 1000, 2000, minLimit, maxLimit);
+    int ch = pulseIn(channelInput, HIGH, 30000);
+    if (ch < 100) return defaultValue;
+    return map(ch, 1000, 2000, minLimit, maxLimit);
 }
 
 void setup() 
@@ -33,7 +33,6 @@ void setup()
 
 void loop() 
 {
-    chValue = readChannel(signalPin, 1000, 2000, 1500);
+    chValue = readChannel(SIGNAL_PIN, MAX_REVERSE, MAX_FORWARD, ARM_VAL);
     myESC.speed(chValue);   
-
 }
