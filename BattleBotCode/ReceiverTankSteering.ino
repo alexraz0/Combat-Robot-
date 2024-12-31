@@ -11,6 +11,7 @@
 
 ESC myESCtext (ESC_PIN, MAX_REVERSE, MAX_FORWARD, ARM_VAL);       // ESC_Name (ESC PIN, Minimum Value, Maximum Value, Default Speed, Arm Value)
 ESC myESC_tLess (ESC_PIN_fLess, MAX_REVERSE, MAX_FORWARD, ARM_VAL);  
+//ESC 1 is the text less motor ESC_tless 
 
 int chValue1;
 int chValue2;
@@ -55,12 +56,23 @@ void loop()
     chValue2 = readChannel(SIGNAL_PIN2, MAX_REVERSE, MAX_FORWARD, ARM_VAL);
     //myESC_fLess.speed(chValue2);
     //moveMotorsForward(chValue1, chValue2);
-    if (chValue1 >= 1600 ||  chValue1 <= 1400)
+    if (chValue1 >= 1550 ||  chValue1 <= 1450)
     { //NEED TO DOUBLE CHECK IF PIVOT STEER IS ACTUALLY REVERSED. MAY ACTUALLY BE TRADITIONALLY STEERING
       if (chValue1 <= 1400)
+      //channel 1 is moving the joystick right to left
+      //move right joystick to the left makes the motor reverse
       { //1500+(1500-chvalue1)=3000-chValue1; the value (1500-chValue1) is the distance from the midpoint value 1500
-        myESC_tLess.speed(3000-chValue1+200); //PIVOT STEER: we add 200 so it's offset from the other motor
-        myESCtext.speed(chValue1);
+        int esc1Speed = 3000-chValue1+150;
+        myESC_tLess.speed(esc1Speed); //PIVOT STEER: we add 150 so it's offset from the other motor
+        if (esc1Speed >= 1850)
+        {
+          myESCtext.speed(1150);
+        }
+        else
+        {
+          myESCtext.speed(chValue1);
+        }
+        Serial.println("if ch1");
         Serial.println(chValue1);
       }
       else
