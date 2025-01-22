@@ -1,4 +1,10 @@
-# Important Info To Keep Track Of :star2:
+# Important Info For BeetleWeight To Keep Track Of :star2:
+
+**Shaft Dimensions for Motors**
+* 24mm DC Planetary Gearmotor - 6V, 530 RPM
+* Motor : 24.4D * 30.8L mm
+* Gearbox : 24D * 25.3L mm
+* Shaft : 6D * 18.2L mm, D-shaped
 
 **Receiver Channel Numbers**
 * Channel 1: right stick left and right
