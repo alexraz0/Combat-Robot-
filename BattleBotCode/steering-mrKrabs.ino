@@ -37,7 +37,7 @@ void moveForwardBackward (int speed, int invSpeed)
 }
 
 // works well as pure pivot turn
-void moveLeftRight (int speed)
+void moveLeftRight (int speed, int invSpeed)
 {   //channel 2, the right joystick moves up and down
         myESC_M1.speed(speed); 
         myESC_M2.speed(speed);
