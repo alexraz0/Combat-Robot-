@@ -29,7 +29,9 @@ ESC myESC_M2 (ESC_PIN_M2, MAX_REVERSE, MAX_FORWARD, ARM_VAL);
 
 int ch1Value;
 int ch2Value;
-
+int inverseMotorCH1;
+int inverseMotorCH2;
+bool exitRightLeft;
 
 
 
@@ -83,16 +85,31 @@ void loop()
     ch2Value = readChannel(SIGNAL_PIN2, MAX_REVERSE, MAX_FORWARD, ARM_VAL);
     //1500+(1500-speed)=3000-speed
     //1500-(speed-1500)=3000-speed
-    int inverseMotorCH1 = 3000-ch1Value; 
-    int inverseMotorCH2 = 3000-ch2Value; 
+    inverseMotorCH1 = 3000-ch1Value; 
+    inverseMotorCH2 = 3000-ch2Value; 
 
-    if ((ch1Value >= 1505 ||  ch1Value <= 1495) && (ch2Value <= 1505 ||  ch2Value >= 1495))
-    { //NEED TO DOUBLE CHECK IF PIVOT STEER IS ACTUALLY REVERSED. MAY ACTUALLY BE TRADITIONALLY STEERING
+
+    if ((ch1Value >= 1500) && (ch1Value <= ch2Value))
+    { 
        moveLeftRight(ch1Value, inverseMotorCH1);
     }
-    else // (no ch1 input)
-    {
-      moveForwardBackward(ch2Value, inverseMotorCH2); 
+    else if ((ch1Value >= 1500) && (ch1Value <= inverseMotorCH2))
+    { 
+       moveLeftRight(ch1Value, inverseMotorCH1);
     }
+    else if ((ch1Value <= 1500) && (ch1Value >= ch2Value))
+    {
+        moveLeftRight(ch1Value, inverseMotorCH1);
+    }
+    else if ((ch1Value <= 1500) && (ch1Value >= inverseMotorCH2))
+    {
+        moveLeftRight(ch1Value, inverseMotorCH1); 
+    }
+    else
+    {
+        moveForwardBackward(ch2Value, inverseMotorCH2);
+    }
+
+    delay(500);
 
 }
