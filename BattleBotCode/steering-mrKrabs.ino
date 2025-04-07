@@ -89,21 +89,13 @@ void loop()
     inverseMotorCH2 = 3000-ch2Value; 
 
 
-    if ((ch1Value >= 1500) && (ch1Value <= ch2Value))
+    if (((ch1Value >= 1500) && (ch1Value <= ch2Value)) && (ch1Value <= inverseMotorCH2))
     { 
        moveLeftRight(ch1Value, inverseMotorCH1);
     }
-    else if ((ch1Value >= 1500) && (ch1Value <= inverseMotorCH2))
-    { 
-       moveLeftRight(ch1Value, inverseMotorCH1);
-    }
-    else if ((ch1Value <= 1500) && (ch1Value >= ch2Value))
+    else if (((ch1Value <= 1500) && (ch1Value >= ch2Value)) && (ch1Value >= inverseMotorCH2))
     {
         moveLeftRight(ch1Value, inverseMotorCH1);
-    }
-    else if ((ch1Value <= 1500) && (ch1Value >= inverseMotorCH2))
-    {
-        moveLeftRight(ch1Value, inverseMotorCH1); 
     }
     else
     {
