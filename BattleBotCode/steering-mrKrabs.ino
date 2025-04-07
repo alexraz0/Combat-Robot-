@@ -7,17 +7,25 @@
 
 #define SIGNAL_PIN1 (8) 
 #define SIGNAL_PIN2 (7) 
-#define ESC_PIN (9)
+#define ESC_PIN_M2 (9)
 #define ESC_PIN_M1 (10)
 #define LED_PIN (13)  
 #define MAX_REVERSE (1125)
 #define MAX_FORWARD (1875)
-#define ARM_VAL (1500)                                        // Midpoint
+#define ARM_VAL (1500)
+/*
+6V/8V = 0.75
+Assumed 1500 = 0V and 2000 = 8V and 1000 = 8V
+2000 - 1500 = 500 which is the range the volts can span
+0.75(500) = 375 so we add this to the neutral value 1500 to get the 6 Volt max
+1500 + 375 = 1875 upper 6 volt max
+1500 - 375 = 1125  lower 6 volt max
+*/
 
-ESC myESC_M2 (ESC_PIN, MAX_REVERSE, MAX_FORWARD, ARM_VAL);       // ESC_Name (ESC PIN, Minimum Value, Maximum Value, Default Speed, Arm Value)
-ESC myESC_M1 (ESC_PIN_M1, MAX_REVERSE, MAX_FORWARD, ARM_VAL);  
-//ESC 1 is the text less motor ESC_tless and fLess
-//ESC 2 is the text motor
+
+// ESC_Name (ESC PIN, Minimum Value, Maximum Value, Default Speed, Arm Value)
+ESC myESC_M1 (ESC_PIN_M1, MAX_REVERSE, MAX_FORWARD, ARM_VAL); 
+ESC myESC_M2 (ESC_PIN_M2, MAX_REVERSE, MAX_FORWARD, ARM_VAL); 
 
 int ch1Value;
 int ch2Value;
@@ -46,7 +54,7 @@ void moveLeftRight (int speed, int invSpeed)
 
 
 
-
+//defaultValue is ARM_VAL=1500
 int readChannel(int channelInput, int minLimit, int maxLimit, int defaultValue)
 {
     int ch = pulseIn(channelInput, HIGH, 30000);
@@ -78,7 +86,7 @@ void loop()
     int inverseMotorCH1 = 3000-ch1Value; 
     int inverseMotorCH2 = 3000-ch2Value; 
 
-    if (ch1Value >= 1550 ||  ch1Value <= 1450)
+    if ((ch1Value >= 1505 ||  ch1Value <= 1495) && (ch2Value <= 1505 ||  ch2Value >= 1495))
     { //NEED TO DOUBLE CHECK IF PIVOT STEER IS ACTUALLY REVERSED. MAY ACTUALLY BE TRADITIONALLY STEERING
        moveLeftRight(ch1Value, inverseMotorCH1);
     }
